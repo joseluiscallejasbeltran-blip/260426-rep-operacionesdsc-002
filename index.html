@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Bitácora Unidades</title>
+
+  <!-- Import map (ready to add esm.sh libs if needed) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "jspdf": "https://esm.sh/jspdf@2.5.1",
+      "html2canvas": "https://esm.sh/html2canvas@1.4.1"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div id="app">
+    <div class="topbar">
+      <div class="left-actions">
+        <button id="newReportBtn" class="btn primary">Nuevo reporte</button>
+      </div>
+      <div class="actions">
+        <button id="exportPdfTopBtn" class="btn">Exportar PDF</button>
+      </div>
+    </div>
+
+    <div id="listContainer" class="list"></div>
+
+    <nav class="bottombar" role="navigation" aria-label="Panel de control">
+      <div class="bot-nav" role="toolbar" aria-label="Acciones principales">
+        <button id="newReportBtnBottom" class="icon-btn" title="Nuevo reporte" aria-label="Nuevo reporte">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          <span>Nuevo</span>
+        </button>
+        <button id="exportPdfBottomBtn" class="icon-btn" title="Exportar PDF" aria-label="Exportar PDF">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v8"/><path d="M7 7h10v14H7z"/></svg>
+          <span>PDF</span>
+        </button>
+        <button id="exportExcelTopBtn" class="icon-btn" title="Exportar Excel" aria-label="Exportar Excel">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 7h10M7 12h10M7 17h10"/></svg>
+          <span>Excel</span>
+        </button>
+        <button id="clearAllBtn" class="icon-btn" title="Borrar todos los registros" aria-label="Borrar todos los registros">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+          <span>Borrar</span>
+        </button>
+        <button id="logoutBtn" class="icon-btn" title="Cerrar sesión" aria-label="Cerrar sesión">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+          <span>Salir</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Modals -->
+    <div id="modalOverlay" class="overlay hidden" role="dialog" aria-modal="true">
+      <div class="modal">
+        <button id="closeModal" class="close">&times;</button>
+        <div id="modalContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,480 @@
+/* Background applied to entire app and all windows as requested */
+:root{
+  --accent:#123a93;
+  --muted:#f6f6f6;
+  --glass: rgba(255,255,255,0.7);
+  --card: rgba(255,255,255,0.85);
+  --radius:12px;
+}
+
+/* Use provided project asset as full-screen background */
+html,body{
+  height:100%;
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background-image: url("/ChatGPT Image 5 feb 2026, 14_35_47.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color:#0b2b2b;
+}
+
+/* App container centered and constrained for mobile one-screen layout */
+#app{
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  padding:12px;
+  box-sizing:border-box;
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+}
+
+/* Topbar */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+}
+
+/* Bottom fixed control panel (dashboard style) */
+.bottombar {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  justify-content: center;
+  pointer-events: auto;
+  z-index: 90;
+  -webkit-tap-highlight-color: transparent;
+}
+.bot-nav {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.92));
+  box-shadow: 0 18px 40px rgba(2,6,7,0.18);
+}
+
+/* icon button used in bottom control panel */
+.icon-btn{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  width:64px;
+  min-width:64px;
+  padding:8px;
+  border-radius:12px;
+  border:none;
+  background:transparent;
+  color: #0b2b2b;
+  font-size:12px;
+  cursor:pointer;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.icon-btn svg {
+  display:block;
+  color: #0b2b2b;
+  opacity:0.95;
+}
+.icon-btn span{
+  font-size:11px;
+  line-height:1;
+  color:#0b2b2b;
+  opacity:0.95;
+}
+.icon-btn:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(2,6,7,0.12);
+  background: linear-gradient(180deg, rgba(18,58,147,0.06), rgba(18,58,147,0.03));
+  color: #123a93;
+}
+.icon-btn:active{
+  transform: translateY(-1px) scale(.995);
+}
+
+/* primary variant for prominent action (e.g., Nuevo) */
+.icon-btn.primary{
+  background: linear-gradient(180deg,#123a93,#144987);
+  color: #ffffff;
+  border: 2px solid #FFD400;
+}
+.icon-btn.primary svg{ color: #fff; opacity:1; }
+
+/* ensure touch target is large enough on small screens */
+@media (max-width:420px){
+  /* tighten bottom nav and icon controls for small screens */
+  .bot-nav { padding:6px; border-radius:10px; }
+  .icon-btn { width:52px; min-width:52px; padding:6px; gap:4px; font-size:11px; }
+  .icon-btn span{ font-size:10px; }
+
+  /* make modals and cards more compact */
+  .modal{ padding:10px; border-radius:10px; }
+  .modal.no-card > div { padding:10px; max-width:440px; width: calc(100% - 24px); }
+  .overlay{ padding:8px; }
+
+  /* reduce typographic scale for mobile */
+  html, body { font-size:14px; }
+  .card{ padding:8px; min-height:56px; }
+  .card .meta .title{ font-size:14px; }
+  .card .meta .small{ font-size:11px; }
+
+  /* form and inputs */
+  .input, textarea{ font-size:13px; padding:8px; border-radius:8px; }
+  .btn{ padding:8px 10px; font-size:13px; border-radius:8px; }
+
+  /* checklist adjustments */
+  .checklist{ max-height:260px; }
+  .check-item{ padding:6px; border-radius:8px; }
+  .check-item .check-label{ font-size:13px; }
+
+  /* module header smaller */
+  .module-title{ font-size:12px; padding:6px; border-radius:8px; }
+
+  /* status buttons and small controls */
+  .status-btn{ min-width:34px; min-height:30px; padding:4px 6px; font-size:13px; }
+  #checkKm{ padding:8px; font-size:14px; border-radius:8px; }
+
+  /* image gallery cards */
+  #imagesGrid > div { height:160px; }
+  #annotContainer img { max-height:52vh; }
+
+  /* ensure touch targets remain usable */
+  .icon-btn, .btn { min-height:40px; }
+
+  /* keep other small-screen overrides */
+  select#unitList{ min-width:120px; padding:8px; }
+}
+
+/* Unit selector */
+.unit-select{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+select#unitList{
+  min-width:140px;
+  padding:10px;
+  border-radius:10px;
+  border: none;
+  background: linear-gradient(180deg,var(--glass),rgba(255,255,255,0.6));
+  box-shadow: 0 6px 18px rgba(3,10,12,0.18);
+  font-size:14px;
+  appearance:none;
+}
+
+/* Buttons */
+.btn{
+  padding:10px 12px;
+  border-radius:10px;
+  border:none;
+  background:var(--card);
+  box-shadow: 0 6px 14px rgba(3,10,12,0.12);
+  font-size:14px;
+}
+
+.btn.primary{
+  background: linear-gradient(180deg,#123a93,#144987);
+  color:white;
+  border: 2px solid #FFD400;
+}
+
+/* List area */
+.list{
+  flex:1;
+  overflow:auto;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  padding-bottom:8px;
+  -webkit-overflow-scrolling:touch;
+}
+
+/* Cards for each report */
+.card{
+  background: rgba(255,255,255,0.9);
+  border-radius:12px;
+  padding:10px;
+  box-shadow: 0 8px 18px rgba(2,6,7,0.12);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  min-height:64px;
+}
+
+.card .meta{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  flex:1;
+}
+
+.card .meta .title{
+  font-weight:600;
+  font-size:15px;
+}
+
+.card .meta .small{
+  font-size:12px;
+  color:#264b4a;
+  opacity:0.85;
+}
+
+/* Controls inside card */
+.card .controls{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+/* Overlay modal (same background visible behind with blur) */
+.overlay{
+  position:fixed;
+  inset:0;
+  display:flex;
+  /* center modals vertically to allow the branch box to be centered on screen */
+  align-items:center;
+  justify-content:center;
+  background: linear-gradient(0deg, rgba(2,6,7,0.36), rgba(2,6,7,0.16));
+  transition:opacity .18s ease, transform .18s ease;
+  padding:12px;
+  box-sizing:border-box;
+}
+
+.overlay.hidden{
+  display:none;
+}
+
+/* Modal card - ensure background uses same warehouse image via transparent glass effect */
+.modal{
+  width:100%;
+  max-width:720px;
+  border-radius:14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(255,255,255,0.9));
+  padding:14px;
+  box-shadow: 0 18px 48px rgba(2,6,7,0.36);
+  transform-origin:center;
+}
+
+/* Special variant to hide the white card for the initial blocking branch selector.
+   Make it fill the viewport and center contents; prevent internal scrolling by using overlay.no-scroll. */
+.modal.no-card{
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  max-width: 100%;
+  width: 100%;
+  border-radius: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Ensure the inner content block inside the full-viewport no-card modal is centered
+   and constrained so margins/borders appear centered on screen. This targets the
+   immediate child inserted by JavaScript (the content wrapper div). */
+.modal.no-card > div {
+  /* Make the inner content responsive: tighten horizontal inset on small screens
+     so the modal content doesn't overflow viewport margins on mobile if padding/margins apply */
+  width: calc(100% - 24px);
+  max-width: 520px;
+  margin: 0 12px;
+  box-sizing: border-box;
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
+
+  /* Transparent inner content: remove white box, border and decorative shadow */
+  background: transparent;
+  color: #ffffff;
+  border: none;
+  box-shadow: none;
+}
+
+/* For wider viewports keep the centered max-width behavior */
+@media (min-width: 560px) {
+  .modal.no-card > div {
+    width: 100%;
+    margin: 0 auto;
+    padding: 14px;
+  }
+}
+
+/* When overlay has .no-scroll, block any document scrolling while the blocking modal is visible */
+.overlay.no-scroll{
+  overflow: hidden;
+  -webkit-overflow-scrolling: auto;
+}
+
+/* Close button */
+.close{
+  position:absolute;
+  right:18px;
+  top:12px;
+  border:none;
+  background:transparent;
+  font-size:22px;
+  color:#0b2b2b;
+}
+
+/* Form elements */
+.form-row{
+  display:flex;
+  gap:8px;
+  margin-bottom:10px;
+  flex-wrap:wrap;
+}
+
+.input, textarea{
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  min-width:0;
+  background:rgba(255,255,255,0.95);
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,0.04);
+  font-size:14px;
+}
+
+textarea{
+  min-height:100px;
+  resize:none;
+}
+
+.checklist{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  max-height:333px;
+  overflow:auto;
+  padding-right:6px;
+}
+
+.check-item{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  /* make base background transparent so nth-child rules control row colors */
+  background: transparent;
+  padding:8px;
+  border-radius:10px;
+}
+
+.small-muted{
+  font-size:12px;
+  color:#173a39;
+  opacity:0.8;
+}
+
+/* Responsive touch-friendly sizing */
+@media (max-width:420px){
+  .modal{ border-radius:12px; padding:12px; }
+  .btn{ padding:10px; font-size:13px; }
+  select#unitList{ min-width:120px; }
+}
+
+/* Blinking royal-blue satin frame for image viewer button (no movement, only color pulse) */
+@keyframes satinBlink {
+  0% {
+    box-shadow: 0 0 0 2px rgba(20, 54, 135, 0.95), inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+  50% {
+    box-shadow: 0 0 12px 6px rgba(20, 54, 135, 0.12), inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+  100% {
+    box-shadow: 0 0 0 2px rgba(20, 54, 135, 0.95), inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+}
+
+/* apply to the "Ver imágenes" control; preserve base .btn look */
+.btn.blink-frame{
+  position:relative;
+  transition: none;
+  animation: satinBlink 1.6s ease-in-out infinite;
+  border-radius:10px;
+}
+
+/* Status button selected visual: royal-blue satin frame */
+.status-btn{
+  min-width:32px;
+  min-height:30px;
+  padding:4px 6px;
+  border-radius:8px;
+  transition: box-shadow .12s ease, background .12s ease, color .12s ease, transform .09s ease;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  font-size:13px;
+}
+.status-btn.selected{
+  color:#fff !important;
+  background: linear-gradient(180deg, #123a93 0%, #144987 40%, #163f7f 100%) !important;
+  box-shadow: 0 10px 24px rgba(18,58,147,0.18), 0 0 0 3px rgba(18,58,147,0.12);
+  animation: satinBlink 1.6s ease-in-out infinite;
+  transform: translateY(-1px);
+  border: 2px solid #FFD400;
+}
+
+/* Module header (royal-blue satin look) */
+.module-title{
+  font-weight:700;
+  font-size:13px;
+  color: #fff;
+  padding:8px;
+  border-radius:8px;
+  background: linear-gradient(180deg, #123a93 0%, #144987 40%, #163f7f 100%);
+  box-shadow: 0 6px 18px rgba(18, 58, 147, 0.22), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+/* Checklist item alternating background: clear contrasting rows */
+.checklist .check-item{
+  padding:8px;
+  border-radius:8px;
+}
+
+/* Alternating row colors requested by user: odd -> #DCE6F1, even -> #D9D9D9
+   Applied broadly so dynamically created .check-item rows (modals, lists, cards)
+   also receive the intended alternating fill. */
+.check-item:nth-child(odd){
+  background: #DCE6F1;
+}
+
+.check-item:nth-child(even){
+  background: #D9D9D9;
+}
+
+/* Ensure check-label text contrasts well */
+.checklist .check-item .check-label{
+  color: #0b2b2b;
+}
+
+/* Kilometraje input: white background with royal-blue outline for checklist */
+#checkKm {
+  background: #ffffff;
+  color: #0b2b2b;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #123a93; /* royal-blue outline */
+  box-shadow: 0 6px 14px rgba(18,58,147,0.08);
+  font-weight: 600;
+  -webkit-appearance: none;
+  appearance: none;
+}
