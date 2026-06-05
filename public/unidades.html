@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unidades - Mi Proyecto</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Encabezado con logo -->
+    <header class="header">
+      <div class="logo-section">
+        <img src="img/logo.png" alt="Logo del sitio" class="logo">
+        <h1>Mi Proyecto</h1>
+      </div>
+      
+      <!-- Menú de navegación -->
+      <nav class="navbar">
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Inicio</a></li>
+          <li><a href="unidades.html" class="nav-link active">Unidades</a></li>
+          <li><a href="index.html#contacto" class="nav-link">Contacto</a></li>
+        </ul>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+      <section class="unidades-section">
+        <h2>Nuestras Unidades</h2>
+        <p class="subtitle">Conoce todos nuestros servicios y productos disponibles</p>
+
+        <!-- Filtro/búsqueda -->
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Buscar unidades...">
+          <button id="searchBtn" class="btn btn-secondary">Buscar</button>
+        </div>
+
+        <!-- Lista de unidades -->
+        <div class="unidades-list" id="unidadesList">
+          <!-- Las unidades se cargarán desde app.js -->
+        </div>
+      </section>
+
+      <!-- Formulario de contacto/consulta -->
+      <section class="contact-form-section">
+        <h3>Solicita más información</h3>
+        <form id="contactForm" class="contact-form">
+          <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="mensaje">Mensaje:</label>
+            <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Enviar Consulta</button>
+        </form>
+        <div id="formMessage" class="form-message"></div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; 2026 Mi Proyecto. Todos los derechos reservados.</p>
+      <p>Contacto: info@miproyecto.com | Teléfono: +34 123 456 789</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
